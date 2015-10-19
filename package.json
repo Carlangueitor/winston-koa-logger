@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Charly Román <charly@croman.mx>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Carlangueitor/winston-koa-logger.git"
+  },
   "license": "MIT",
   "dependencies": {
-    "chalk": "^1.1.1"
+    "chalk": "1.1.1"
   }
 }
