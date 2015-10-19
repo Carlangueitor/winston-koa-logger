@@ -1,6 +1,6 @@
 # winston-koa-logger
 
-> [Winston](https://github.com/winstonjs/winston) based middleware logger for [Koa](https://github.com/koajs/koa) based on [`express-winston`](https://github.com/bithavoc/express-winston).
+> [Winston](https://github.com/winstonjs/winston) middleware logger for [Koa](https://github.com/koajs/koa) based on [`express-winston`](https://github.com/bithavoc/express-winston).
 
 # Instalation
     npm install winston-koa-logger
