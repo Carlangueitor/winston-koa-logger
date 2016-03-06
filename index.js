@@ -20,9 +20,9 @@ function logger(winstonInstance) {
     const ms = new Date() - start;
 
     let logLevel;
-    if(this.status >=500) { logLevel = 'error'; }
-    if(this.status >=400) { logLevel = 'warn'; }
     if(this.status >=100) { logLevel = 'info'; }
+    if(this.status >=400) { logLevel = 'warn'; }
+    if(this.status >=500) { logLevel = 'error'; }
 
     let msg = (chalk.gray(`${this.method} ${this.originalUrl}`) +
                chalk[STATUS_COLORS[logLevel]](` ${this.status} `) +
