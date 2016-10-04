@@ -1,4 +1,5 @@
 'use strict';
+const tty = require('tty');
 const chalk = require('chalk');
 
 
@@ -8,12 +9,13 @@ const STATUS_COLORS = {
   info: 'green'
 };
 
+
 /**
  * Logger
  *
  * @param {object} winstonInstance
  */
-function logger(winstonInstance) {
+function logger(winstonInstance, {useColors=(tty.isatty(1) && process.env.NODE_ENV !== 'production')}={}) {
   return function *middleWare(next) {
     const start = new Date();
     yield next;
@@ -23,12 +25,18 @@ function logger(winstonInstance) {
     if(this.status >=500) { logLevel = 'error'; }
     else if(this.status >=400) { logLevel = 'warn'; }
     else if(this.status >=100) { logLevel = 'info'; }
+    
+    const msgOne = `${this.method} ${this.originalUrl}`;
+    const msgTwo = ` ${this.status} `;
+    const msgThree = `${ms}ms`;
+    
+    const msgWithColors = (chalk.gray(msgOne) +
+               chalk[STATUS_COLORS[logLevel]](msgTwo) +
+               chalk.gray(msgThree));
+    
+    const msgWithoutColors = msgOne + msgTwo + msgThree;
 
-    let msg = (chalk.gray(`${this.method} ${this.originalUrl}`) +
-               chalk[STATUS_COLORS[logLevel]](` ${this.status} `) +
-               chalk.gray(`${ms}ms`));
-
-    winstonInstance.log(logLevel, msg);
+    winstonInstance.log(logLevel, useColors ? msgWithColors : msgWithoutColors);
   };
 }
 
